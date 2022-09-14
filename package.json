@@ -1,0 +1,36 @@
+{
+  "name": "blog_app",
+  "version": "1.0.0",
+  "description": "blog application",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server/server.js",
+    "server": "nodemon server/server.js",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mrloumd/blog_app.git"
+  },
+  "author": "Marlou Amada",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mrloumd/blog_app/issues"
+  },
+  "homepage": "https://github.com/mrloumd/blog_app#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "colors": "^1.4.0",
+    "dotenv": "^16.0.2",
+    "express": "^4.18.1",
+    "express-async-handler": "^1.2.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.6.0"
+  },
+  "devDependencies": {
+    "concurrently": "^7.4.0",
+    "nodemon": "^2.0.19"
+  }
+}
