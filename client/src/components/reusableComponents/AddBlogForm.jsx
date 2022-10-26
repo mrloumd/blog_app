@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { createBlog } from '../features/blogs/blogSlice'
+import { createBlog } from '../../features/blogs/blogSlice'
 
 function BlogForm() {
   const [title, setTitle] = useState('')
@@ -13,6 +13,7 @@ function BlogForm() {
 
     dispatch(createBlog({ title, description }))
     setTitle('')
+    setDescription('')
   }
 
   return (
@@ -20,8 +21,8 @@ function BlogForm() {
       {' '}
       <form onSubmit={onSubmit}>
         <div className="form-group">
-          <label htmlFor="title"> Blog title</label>
           <input
+            placeholder="Blog Title"
             type="text"
             name="title"
             id="title"
@@ -31,8 +32,8 @@ function BlogForm() {
         </div>
 
         <div className="form-group">
-          <label htmlFor="descripton"> Blog description</label>
           <input
+            placeholder="Blog description"
             type="text"
             name="description"
             id="description"

@@ -1,13 +1,15 @@
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import BLogForm from '../components/BlogForm'
-import BLogItem from '../components/BlogItem'
-import Spinner from '../components/Spinner'
+// import BLogForm from '../components/BlogForm'
+import AddBlogModal from '../components/reusableComponents/AddBlogModal'
+import BLogItem from '../components/reusableComponents/BlogItem'
+import Spinner from '../components/reusableComponents/Spinner'
 import { getBlogs } from '../features/blogs/blogSlice'
 import { reset } from '../features/auth/authSlice'
+import { StyledPage } from '../components/styledComponents/dashboardPage'
 
-function Home() {
+function Dashboard() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
@@ -15,6 +17,10 @@ function Home() {
   const { blogs, isLoading, isError, message } = useSelector(
     (state) => state.blogs,
   )
+
+  const orderedBlogs = blogs
+    .slice()
+    .sort((a, b) => b.createdAt.localeCompare(a.createdAt))
 
   useEffect(() => {
     if (isError) {
@@ -37,30 +43,25 @@ function Home() {
   }
 
   return (
-    <>
-      <section className="heading">
-        <h1>
-          Welcome {user && user.firstName} &nbsp;
-          {user && user.lastName}
-        </h1>
-        <p>Blogs Dashboard</p>
+    <StyledPage className="mt-5">
+      <section className="blogs-container addBlog m-auto">
+        {' '}
+        <AddBlogModal />
       </section>
 
-      <BLogForm />
-
-      <section>
+      <section className="blogs-container">
         {blogs.length > 0 ? (
-          <div>
-            {blogs.map((blog) => (
+          <div className="blogs-card">
+            {orderedBlogs.map((blog) => (
               <BLogItem key={blog._id} blog={blog} />
             ))}
           </div>
         ) : (
-          <h3>You have not set any blogs</h3>
+          <h3>Share your ideas and questions.</h3>
         )}
       </section>
-    </>
+    </StyledPage>
   )
 }
 
-export default Home
+export default Dashboard

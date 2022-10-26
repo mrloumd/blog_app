@@ -1,9 +1,9 @@
 import { FaSignInAlt, FaUser, FaSignOutAlt, FaBlog } from 'react-icons/fa'
-import { StyledNavbar, StyledNav } from './styledComponents/navbar'
+import { StyledNavbar, StyledNav } from '../styledComponents/navbar'
 import { Link, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { toast } from 'react-toastify'
-import { logout, reset } from '../features/auth/authSlice'
+import { logout, reset } from '../../features/auth/authSlice'
 
 function Navbar() {
   const navigate = useNavigate()
@@ -41,6 +41,11 @@ function Navbar() {
               <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                 {user ? (
                   <>
+                    <li>
+                      <Link className="btn" to="/userProfile">
+                        <FaUser /> View Blogs
+                      </Link>
+                    </li>
                     <li>
                       <button className="btn" onClick={onLogout}>
                         <FaSignOutAlt /> Logout
